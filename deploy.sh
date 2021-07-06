@@ -15,7 +15,7 @@ read bucket
 echo
 
 # AWS no longer vends the requests module. We'll need to use pip3 package it with our code.
-pip3 install requests -t ./whoami_lambda
+pip3 install requests -t ./whoami_lambda --upgrade
 
 sam build
 
@@ -23,6 +23,7 @@ sam package --s3-bucket $bucket --output-template-file $DIR$DEPLOY
 
 sam deploy --template-file $DIR$DEPLOY --stack-name whoami-api-stack --capabilities CAPABILITY_IAM --parameter-overrides SecretArnParam="$secret_arn"
 
-echo -e "\n########\nURL for whoami API:"
-
-aws cloudformation describe-stacks --stack-name whoami-api-stack --query "Stacks[0].Outputs[0].OutputValue"
+if [ $? -eq 0 ]; then
+	echo "Checking API with cURL..."
+	curl -s $(aws cloudformation describe-stacks --stack-name whoami-api-stack --query "Stacks[0].Outputs[0].OutputValue")| python -m json.tool
+fi

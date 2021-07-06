@@ -241,4 +241,16 @@ $RECYCLE.BIN/
 
 _deploy/*
 .idea/*
+
+# Omit some things related to deploying AWS SAM apps. 
+
+whoami_lambda/bin/
+whoami_lambda/certifi*
+whoami_lambda/chardet-4.0.0.dist-info/
+whoami_lambda/chardet*
+whoami_lambda/idna*
+whoami_lambda/requests*
+whoami_lambda/urllib3*
+.aws-sam
+
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode

@@ -33,5 +33,5 @@ Resources:
 
 Outputs:
   whoamiApi:
-    Description: "This is the URL of your new Lambda function:"
+    Description: "*** This is the URL of your new Whoami API: ***"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/whoami/"
